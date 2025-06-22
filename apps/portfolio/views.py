@@ -1,6 +1,7 @@
 from django.views.generic.base import TemplateView
 from .models import Personal, About, Experience, Description, Education, Technology, Portfolio
 from .forms import ContactForm
+import cloudinary.uploader
 from django.core.mail import send_mail
 from django.conf import settings # Import settings to access email configuration
 from django.shortcuts import render # Keep render if you need to render error pages/messages
@@ -114,3 +115,18 @@ class DigitalCVPageView(TemplateView):
     
 def handle_not_found(request, exception):
     return render(request, "layouts/page-404.html", status=404) # Set status code for 404
+def upload_from_path(request):
+    if request.method == 'POST':
+        file_path = '/path/to/your/image.jpg' # Or get it from request.FILES
+        result = cloudinary.uploader.upload(file_path, folder="my_django_uploads")
+        # result will contain information about the uploaded file,
+        # including its secure_url, public_id, etc.
+        print(result['secure_url'])
+        # You can then save this URL or public_id to your model
+    # ...
+
+def upload_from_django_file(request):
+    if request.method == 'POST' and request.FILES.get('my_image_field'):
+        uploaded_file = request.FILES['my_image_field']
+        result = cloudinary.uploader.upload(uploaded_file, folder="user_uploads")
+        print(result['secure_url'])

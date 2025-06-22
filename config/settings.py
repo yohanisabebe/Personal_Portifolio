@@ -81,8 +81,7 @@ GZIP_CONTENT_TYPES = [
 
 ROOT_URLCONF = 'config.urls'
 
-TEMPLATE_DIR = os.path.join(CORE_DIR, "templates")  # ROOT dir for templates
-
+TEMPLATE_DIR = BASE_DIR / "templates"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -155,7 +154,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Manila'
+TIME_ZONE = 'Keniya/Nairobi'
 
 USE_I18N = True
 
@@ -174,11 +173,11 @@ else:
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
     ]
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 
-MEDIA_URL = '/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -208,10 +207,12 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': CLOUDINARY_CLOUDNAME,
     'API_KEY': CLOUDINARY_APIKEY,
     'API_SECRET': CLOUDINARY_SECRET,
+    'SECURE': True,
 }
 
 cloudinary.config(
     cloud_name = CLOUDINARY_CLOUDNAME,
     api_key = CLOUDINARY_APIKEY,
     api_secret = CLOUDINARY_SECRET,
+    secure=True
 )

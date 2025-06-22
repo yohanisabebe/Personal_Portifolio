@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / compiled files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Virtual environment
+venv/
+.env/
+
+# Editor files
+.vscode/
+.idea/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Django specific (if applicable)
+media/
+staticfiles/ # Important if you're using collectstatic, as these are generated files
+db.sqlite3 # Your local development database
+
+# Environment variables
+.env
+
+# Other common ignored files
+*~
+*.log
